@@ -13,6 +13,8 @@ const app = express();
 app.use(cors());
 
 //get location data
+GET https://api.darksky.net/forecast/[DARK_SKY_WEATHER_API]/[latitude],[longitude]
+GET https://maps.googleapis.com/maps/api/geocode/json?latlng=[latitude],[longitude]&key=GOOGLE_MAPS_API
 
 //give error message if on wrong site
 app.get('/*' , function(req , res){
