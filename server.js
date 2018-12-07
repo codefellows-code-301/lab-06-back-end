@@ -13,13 +13,39 @@ const app = express();
 app.use(cors());
 
 //get location data
-GET https://api.darksky.net/forecast/[DARK_SKY_WEATHER_API]/[latitude],[longitude]
-GET https://maps.googleapis.com/maps/api/geocode/json?latlng=[latitude],[longitude]&key=GOOGLE_MAPS_API
+app.get('/location', (request, response) => {
+  const locationData = searchToLatLong(request.query.data || 'Lynnwood, WA'); // 'Lynnwood, WA'
+  response.send(locationData);
+})
+function searchToLatLong(query){
+  const geoData = require('./data/geo.json');
+  const location = new Location(geoData.results[0]);
+  return location;
+}
+
+function Location(location){
+  //data the front end needs:
+  /*
+    formatted_query
+    latitude
+    longitude
+  */
+
+  this.formatted_query = location.formatted_address;
+  this.latitude = location.geometry.location.lat;
+  this.longitude = location.geometry.location.lng;
+}
+
+
 
 //give error message if on wrong site
+app.get('/location' , function(req , res){
+  res.status(404).send('You made it!');
+});
+
 app.get('/*' , function(req , res){
   res.status(404).send('Gremlins ate this page... please try again later');
 });
 
 app.listen(PORT,()=>
-console.log(`app is up on PORT ${3000}`));
+console.log(`app is up on PORT ${PORT}`));
