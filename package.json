@@ -1,0 +1,26 @@
+{
+  "name": "city-explorer",
+  "version": "1.0.0",
+  "description": "api for gathering city data",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/etrainor/lab-06-back-end.git"
+  },
+  "author": "Nikki Carthen and Erin Trainor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/etrainor/lab-06/issues"
+  },
+  "homepage": "https://github.com/etrainor/lab-06#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "superagent": "^4.0.0"
+  }
+}
