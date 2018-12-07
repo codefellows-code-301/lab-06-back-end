@@ -4,15 +4,15 @@ Estimate of time needed to complete: 45 MIN
 
 Start time: 1830
 
-Finish time: _____
+Finish time: 1940
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1.10 hours
 
 #Number and name of feature: Feature #2 - Retrieve Weather Information
 
 Estimate of time needed to complete: 45 MIN
 
-Start time: _____
+Start time: 1943
 
 Finish time: _____
 
