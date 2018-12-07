@@ -81,9 +81,9 @@ For this lab assignment, you will convert a location entered by the user into a 
 
 ### Heroku deployoment
 
-- One person from your group should create an instance on Heroku. Refer to lecture 5 for a reminder of the steps, if needed.
+<!-- - One person from your group should create an instance on Heroku. Refer to lecture 5 for a reminder of the steps, if needed.
 - From the Heroku dashboard, select your instance. In the Settings tab, click on the "Reveal Config Vars" button. Enter your API keys.
-- In the Deploy tab, connect your instance to your repository and enable automatic deploys from your master branch. Deploy your application and make sure there are no errors.
+- In the Deploy tab, connect your instance to your repository and enable automatic deploys from your master branch. Deploy your application and make sure there are no errors. -->
 
 ### Feature #1: Obtain latitude and longitude
 
