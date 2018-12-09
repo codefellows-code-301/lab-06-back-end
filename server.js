@@ -13,6 +13,9 @@ const PORT = process.env.PORT || 3000; //takes from a dotenv file and then the t
 const app = express();
 app.use(cors());
 
+//Global Vars
+let weeklyForecast = [];
+
 //get location data
 app.get('/location', (request, response) => {
   const locationData = searchToLatLong(request.query.data || 'Lynnwood, WA'); // 'Lynnwood, WA'
@@ -30,12 +33,6 @@ function searchToLatLong(query){
 }
 
 function Location(location){
-  //data the front end needs:
-  /*
-  formatted_query
-  latitude
-  longitude
-  */
   this.formatted_query = location.formatted_address;
   this.latitude = location.geometry.location.lat;
   this.longitude = location.geometry.location.lng;
@@ -45,41 +42,27 @@ function Location(location){
 
 //Get Weather Data
 app.get('/weather', (request, response) => {
-  const weatherData = searchWeather(request.query.data || latLong[0].latitude, latLong[0].longitude); // 47.8209301, -122.3151314
-  console.log(weatherData, 'Im here');
+  const weatherData = searchWeather(request.query.data || latLong[0].latitude, latLong[0].longitude); 
   response.send(weatherData);
 })
 
 function searchWeather(query){
   const darkSky = require('./data/darksky.json');
-  const weather = new Forecast(darkSky); // might need for loop at daily[i]
-  console.log(weather,'weather');
-  return weather;
+  let week = darkSky.daily.data;
+  week.forEach(day => {
+    new Forecast(day);
+  })
+  return weeklyForecast;
 }
 
-function Forecast(searchWeather){ //should return an array of objects
-  //data the front end needs:
-  /*
-  forecast
-  time
-  8 days
-  */
-  // latLong = [];
-  this.latitude = latLong[0].latitude;
-  this.longitude = latLong[0].longitude;
-  this.time = daily.data.time; //daily data starts on line 1295
-  // this.summary = daily.summary; 
+function Forecast(day){ //should return an array of objects
+  let date = new Date(day.time * 1000);
+  this.time = date.toDateString();
+  this.summary = day.summary;
+  weeklyForecast.push(this);
 }
 
 //give error message if on wrong site
-app.get('/location' , function(req , res){
-  res.status(404).send('Are we There Yet?');
-});
-
-app.get('/weather' , function(req , res){
-  res.status(404).send('Cloudy with a Chance of Meatballs!');
-});
-
 app.get('/*' , function(req , res){
   res.status(404).send('Gremlins ate this page... please try again later');
 });
